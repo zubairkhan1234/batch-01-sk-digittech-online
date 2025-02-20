@@ -2,26 +2,31 @@ import React from 'react'
 import styles from './cart.module.css'
 
 
-function Cart() {
+function Cart(props) {
+
+    let { value } = props
+
+    console.log('Value in Cart component', value)
     return (
-        <div className={styles.cartContainer}>
+        <div className={styles.cartContainer} >
             <div className={styles['cart-header']}>
                 <p>Yout Shopping Cart</p>
-                <p>ID: 124367</p>
+                <p>ID: {value.id}</p>
             </div>
 
             <div className={styles['cart-image-title-box']}>
                 <div>
-                    <img alt='text' className={styles['product-image']} src='https://images.priceoye.pk/nova-smart-watch-pakistan-priceoye-slq4f-270x270.webp' />
+                    {/* <img alt='text' className={styles['product-image']} src='https://images.priceoye.pk/nova-smart-watch-pakistan-priceoye-slq4f-270x270.webp' /> */}
+                    <img alt='text' className={styles['product-image']} src={value.image} />
                 </div>
                 <div className={styles['card-content-right']}>
-                    <p className={styles['product-title']}>This is product title</p>
+                    <p className={styles['product-title']}>{value.title}</p>
                     <button className={styles['stock-badge']}>
                         In stock
                     </button>
                     <div className={styles['counter-container']}>
                         <button>-</button>
-                        <button>{1}</button>
+                        <button>{value.qty}</button>
                         <button>+</button>
                     </div>
                 </div>
@@ -56,7 +61,7 @@ function Cart() {
                             total
                         </span>
                         <span>
-                           1899
+                            1899
                         </span>
                     </div>
                 </div>

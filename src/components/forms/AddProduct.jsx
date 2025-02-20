@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Cart from '../../pages/Product/Cart'
+import React, { useState, useRef } from 'react'
+import Products from '../../pages/Product/Products'
 
 function AddProduct() {
 
@@ -11,31 +11,39 @@ function AddProduct() {
     const productqty = useRef('')
     const stock = useRef(true)
 
-    const [counter, setCounter] = useState(0)
+    // const [counter, setCounter] = useState(0)
     const [products, setProducts] = useState([])
 
-    const [secondCounter, setSecondCounter] = useState(0)
+    // const [secondCounter, setSecondCounter] = useState(0)
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
-        console.log('runnign UseEffect')
+    //     console.log('runnign UseEffect')
 
-        if (counter === 5) {
+    //     if (counter === 5) {
 
-            let className = prompt()
-            console.log(className)
-        }
+    //         let className = prompt()
+    //         console.log(className)
+    //     }
 
-        if (secondCounter === 2) {
-            alert("counter value reached 2")
-        }
-    }, [counter, secondCounter])
+    //     if (secondCounter === 2) {
+    //         alert("counter value reached 2")
+    //     }
+    // }, [counter, secondCounter])
 
 
 
     const createProduct = (event) => {
         event.preventDefault()
+
+        console.log(productImage.current.value)
+        console.log(productImage.current.files[0])
+
+        let file = URL.createObjectURL(productImage.current.files[0])
+
+        console.log(file)
+
         let data = {
             title: productTitle.current.value,
             description: productDec.current.value,
@@ -43,16 +51,15 @@ function AddProduct() {
             id: productID.current.value,
             qty: productqty.current.value,
             stock: stock.current.value,
-            image: productImage.current.value
+            image: file
         }
 
-        console.log('simple data', data)
-        console.log('spread data', ...products)
 
-        setProducts([products, data])
+
+        setProducts([...products, data])
     }
 
-    console.log("all products ", products)
+
 
     return (
         <>
@@ -110,7 +117,7 @@ function AddProduct() {
                 </form>
             </div>
 
-            <Cart />
+            <Products products={products} />
         </>
 
     )
